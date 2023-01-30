@@ -11,3 +11,11 @@ pipeline {
         checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/SharanyaJayaram/nodecontactform.git']])
       }
     }
+     stage('Build Code'){
+      steps{
+        script{
+               sh "npm install"
+              
+        }
+      }
+    }
