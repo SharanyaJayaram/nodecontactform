@@ -18,7 +18,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.render('contact');
+  res.render('contact',{
+    layout:false,
+    name: req.body.name
+  })
 });
 
 app.post('/send', (req, res) => {
