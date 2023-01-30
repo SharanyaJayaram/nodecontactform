@@ -11,7 +11,7 @@ app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
 // Static folder
-app.use('/public/css', express.static(path.join(__dirname, 'public/css')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // Body Parser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
