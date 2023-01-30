@@ -1,6 +1,6 @@
 FROM node:16
 
-WORKDIR /root/nodecontactform/views/contact.handlebars
+WORKDIR /root/nodecontactform/app
 COPY package*.json ./
 RUN npm install 
 COPY . .
