@@ -1,6 +1,6 @@
 FROM node:16
 
-WORKDIR /root/nodecontactform/app
+WORKDIR /root/nodecontactform/app.js
 COPY package*.json ./
 RUN npm install
 COPY . .
