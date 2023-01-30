@@ -14,7 +14,7 @@ environment {
      stage('Build Code'){
       steps{
         script{
-               sh "npm install"
+               sh "npm install --save express body-parser express-handlebars nodemailer"
               
         }
       }
