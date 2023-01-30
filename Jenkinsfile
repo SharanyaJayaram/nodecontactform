@@ -29,7 +29,7 @@ environment {
     stage('Deploy Image') {
       steps{
 
-          withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockeridPassword', usernameVariable: 'dockeridUser')]) {
+          withCredentials([usernamePassword(credentialsId: 'dockerid', passwordVariable: 'dockeridPassword', usernameVariable: 'dockeridUser')]) {
             sh "docker login -u ${env.dockeridUser} -p ${env.dockeridPassword}"
             sh 'docker push sharanyajayaram/emailtest:latest'
             //sh "docker pull sharanyajayaram/bankdocker:latest"
