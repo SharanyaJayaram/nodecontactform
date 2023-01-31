@@ -67,8 +67,9 @@ app.post('/send', (req, res) => {
       if (error) {
           return console.log(error);
       }
-      layout:false,
       console.log('Message sent: %s', info.messageId);   
+      layout:false,
+      name: req.body.name,
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
    
       res.render('contact', {msg:'Email has been sent'});
