@@ -71,8 +71,8 @@ app.post('/send', (req, res) => {
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
    
       res.render('contact', {
-        msg:'Email has been sent'
-        layout:false,
+        msg:'Email has been sent',
+        layout:false
       });
   });
   });
