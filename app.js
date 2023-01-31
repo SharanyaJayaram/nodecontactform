@@ -51,7 +51,6 @@ app.post('/send', (req, res) => {
     tls:{
       rejectUnauthorized:false
     }
-    layout:false,
   });
 
   // setup email data with unicode symbols
@@ -70,7 +69,8 @@ app.post('/send', (req, res) => {
       }
       console.log('Message sent: %s', info.messageId);   
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
+    
+      layout:false,
       res.render('contact', {msg:'Email has been sent'});
   });
   });
