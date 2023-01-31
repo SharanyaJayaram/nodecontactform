@@ -40,12 +40,13 @@ app.post('/send', (req, res) => {
 
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
+    service:gmail
     host:  'smtp.gmail.com', //'mail.google.com', //'smtp-relay.sendinblue.com'
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
         user: 'sharanyaju@gmail.com', // generated ethereal user
-        pass: '****************'  // generated ethereal password
+        pass: 'iwvjrwypxsqecsbl', // generated ethereal password
     },
     tls:{
       rejectUnauthorized:false
