@@ -75,7 +75,6 @@ app.post('/send', (req, res) => {
       res.render('contact', {
         msg:'Email has been sent'
         layout:false,
-        name: req.body.name
       });
   });
   });
