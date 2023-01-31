@@ -1,6 +1,6 @@
 pipeline {
 environment {
-//     def sonarScanner = tool name: 'shasonar' , type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+     def sonarScanner = tool name: 'shasonar' , type: 'hudson.plugins.sonar.SonarRunnerInstallation'
      imagename = "sharanyajayaram/emailtest"
      dockerImage = ''
    }
@@ -19,6 +19,15 @@ environment {
         }
       }
     }
+    stage('Code Scan') {
+    steps {
+      withSonarQubeEnv(installationName: 'shasonar', credentialsId: 'sonarid', envOnly: true) {
+        //withSonarQubeEnv(credentialsId: 'sonarid')  {
+            sh "${sonarScanner}/bin/sonar-scanner -Dsonar.projectKey=develop -Dsonar.sources=. "
+        }
+        
+    }
+}
     stage('Building image') {
       steps{
         script {
