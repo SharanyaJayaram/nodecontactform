@@ -67,10 +67,10 @@ app.post('/send', (req, res) => {
       if (error) {
           return console.log(error);
       }
+      layout:false,
       console.log('Message sent: %s', info.messageId);   
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    
-      layout:false,
+   
       res.render('contact', {msg:'Email has been sent'});
   });
   });
