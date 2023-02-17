@@ -1,14 +1,20 @@
 pipeline {
 environment {
-     def sonarScanner = tool name: 'shasonar' , type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+//      def sonarScanner = tool name: 'shasonar' , type: 'hudson.plugins.sonar.SonarRunnerInstallation'
      imagename = "sharanyajayaram/emailtest"
      dockerImage = ''
    }
   agent any
+     options { 
+        timestamps ()
+        timeout(time: 5, unit: 'MINUTES')   
+        skipDefaultCheckout true
+        buildDiscarder(logRotator(numToKeepStr: '2'))
+    }
   stages {
     stage('Code checkout') {
       steps {
-        checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/SharanyaJayaram/nodecontactform.git']])
+        checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '6f909e92-42df-492b-9970-dab57cfc704b', url: 'https://github.com/SharanyaJayaram/nodecontactform.git']])
       }
     }
      stage('Build Code'){
@@ -19,15 +25,15 @@ environment {
         }
       }
     }
-    stage('Code Scan') {
-    steps {
-      withSonarQubeEnv(installationName: 'shasonar', credentialsId: 'sonarid', envOnly: true) {
-        //withSonarQubeEnv(credentialsId: 'sonarid')  {
-            sh "${sonarScanner}/bin/sonar-scanner -Dsonar.projectKey=develop -Dsonar.sources=. "
-        }
+//     stage('Code Scan') {
+//     steps {
+//       withSonarQubeEnv(installationName: 'shasonar', credentialsId: 'sonarid', envOnly: true) {
+//         //withSonarQubeEnv(credentialsId: 'sonarid')  {
+//             sh "${sonarScanner}/bin/sonar-scanner -Dsonar.projectKey=develop -Dsonar.sources=. "
+//         }
         
-    }
-}
+//     }
+// }
     stage('Building image') {
       steps{
         script {
