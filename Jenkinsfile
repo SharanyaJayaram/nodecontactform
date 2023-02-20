@@ -1,6 +1,5 @@
 pipeline {
 environment {
-//      def sonarScanner = tool name: 'shasonar' , type: 'hudson.plugins.sonar.SonarRunnerInstallation'
      imagename = "sharanyajayaram/emailtest"
      dockerImage = ''
    }
@@ -25,15 +24,6 @@ environment {
         }
       }
     }
-//     stage('Code Scan') {
-//     steps {
-//       withSonarQubeEnv(installationName: 'shasonar', credentialsId: 'sonarid', envOnly: true) {
-//         //withSonarQubeEnv(credentialsId: 'sonarid')  {
-//             sh "${sonarScanner}/bin/sonar-scanner -Dsonar.projectKey=develop -Dsonar.sources=. "
-//         }
-        
-//     }
-// }
     stage('Building image') {
       steps{
         script {
@@ -41,14 +31,23 @@ environment {
         }
       }
     }
+     stage('Select Environment to Deploy') {
+          steps {
+               script {
+                env.selected_environment = input  message: 'Select environment to Deploy',ok : 'Proceed',id :'tag_id',
+                parameters:[choice(choices: ['DEV', 'QA', 'STAGING', 'PROD'], description: 'Select environment', name: 'env')]
+                echo "Deploying in ${env.selected_environment}."
+                }
+            }
+        }
+    }
     stage('Deploy Image') {
       steps{
 
           withCredentials([usernamePassword(credentialsId: 'dockerid', passwordVariable: 'dockeridPassword', usernameVariable: 'dockeridUser')]) {
             sh "docker login -u ${env.dockeridUser} -p ${env.dockeridPassword}"
             sh 'docker push sharanyajayaram/emailtest:latest'
-            //sh "docker pull sharanyajayaram/bankdocker:latest"
-            //sh "docker run -d -t -p 3000:3000 --name boschproject. sharanyajayaram/bankdocker:latest"
+            
           }
 
 
