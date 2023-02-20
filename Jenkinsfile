@@ -54,4 +54,9 @@ environment {
       }
     }
   }
+     post { 
+          always { 
+               echo 'Image was pushed successfully to dockerhub '
+          }
+     }
   }
