@@ -40,7 +40,6 @@ environment {
                 }
             }
         }
-    }
     stage('Deploy Image') {
       steps{
 
@@ -54,4 +53,5 @@ environment {
 
       }
     }
+  }
   }
