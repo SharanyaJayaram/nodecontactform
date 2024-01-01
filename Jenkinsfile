@@ -1,6 +1,6 @@
 pipeline {
 environment {
-     imagename = "sharanyaju/jenkins-00"
+     imagename = "sharanya000/jenkins-00"
      dockerImage = ''
    }
   agent any
@@ -45,7 +45,7 @@ environment {
 
           withCredentials([usernamePassword(credentialsId: 'dockerid', passwordVariable: 'dockeridPassword', usernameVariable: 'dockeridUser')]) {
             sh "docker login -u ${env.dockeridUser} -p ${env.dockeridPassword}"
-            sh 'docker push sharanyaju/jenkins-00:latest'
+            sh 'docker push sharanya000/jenkins-00:latest'
             
           }
 
