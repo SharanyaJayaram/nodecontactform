@@ -3,7 +3,7 @@ environment {
      imagename = "sharanya000/jenkins-00"
      dockerImage = ''
    }
-  agent {label 'jenkinsSlave'}
+  agent any
      options { 
         timestamps ()
         timeout(time: 5, unit: 'MINUTES')   
